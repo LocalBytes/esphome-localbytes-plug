@@ -12,6 +12,9 @@ esphome:
 wifi:
   power_save_mode: high
 
+network:
+    enable_ipv6: true
+
 time:
   - platform: homeassistant
     timezone: Europe/London
