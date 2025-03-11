@@ -341,3 +341,13 @@ button:
     name: "Restart"
   - platform: factory_reset
     name: "Restart with Factory Default Settings"
+  - platform: template
+    id: 10_sec_cycle
+    name: "Ten Second Power Cycle"
+    entity_category: diagnostic
+    disabled_by_default: True
+    on_press:
+      - switch.turn_off: "relay"
+      - delay: 10000ms
+      - switch.turn_on: "relay"
+
