@@ -20,10 +20,6 @@ wifi:
 network:
   enable_ipv6: true
 
-time:
-  - platform: homeassistant
-    timezone: Europe/London
-
 api:
   services:
     - service: calibrate_voltage
@@ -265,16 +261,19 @@ sensor:
       filters:
         - lambda: return x * id(current_multiply);
 
-  # Total daily energy sensor
-  - platform: total_daily_energy
-    name: "Daily Energy"
+  # Total Energy Used
+  - platform: integration
+    name: 'Total Energy'
+    sensor: power
+    time_unit: h
+    restore: true
+    state_class: total_increasing
     device_class: energy
-    power_id: power
-    restore: false
+    unit_of_measurement: 'kWh'
+    accuracy_decimals: 3
     filters:
       # Multiplication factor from W to kW is 0.001
       - multiply: 0.001
-    unit_of_measurement: kWh
 
 # Make calibration factor data readable/set-able from home assistant
 number:
