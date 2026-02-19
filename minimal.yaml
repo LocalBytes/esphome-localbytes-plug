@@ -49,5 +49,6 @@ dashboard_import:
 wifi:
   ap:
     ssid: "${friendly_name}"
+  min_auth_mode: WPA
 
 captive_portal:
