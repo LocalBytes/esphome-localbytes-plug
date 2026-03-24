@@ -117,9 +117,9 @@ switch:
         condition:
           switch.is_off: disable_led
         then:
-          light.turn_on: led
+          output.turn_on: state_led
     on_turn_off:
-      - light.turn_off: led
+      - output.turn_off: state_led
 
   - platform: template
     name: "Disable LED"
@@ -133,36 +133,36 @@ switch:
             lambda: 'return id(setupComplete) == true;'
           then:
             #Flash twice
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 0.15s
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 0.15s
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
       #Final state
-      - light.turn_off: led
+      - output.turn_off: state_led
     on_turn_off:
       - if:
           condition:
             lambda: 'return id(setupComplete) == true;'
           then:
             #Flash twice
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 0.15s
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 1s
       #Final state
       - if:
           condition:
             switch.is_on: relay
           then:
-            light.turn_on: led
+            output.turn_on: state_led
 
   - platform: template
     name: "Disable Button"
@@ -176,17 +176,17 @@ switch:
             lambda: 'return id(setupComplete) == true;'
           then:
             #Flash thrice
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 0.15s
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 0.15s
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 0.15s
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
         #Final state
       - if:
@@ -195,24 +195,24 @@ switch:
               - switch.is_off: relay
               - switch.is_on: disable_led
           then:
-            light.turn_off: led
+            output.turn_off: state_led
     on_turn_off:
       - if:
           condition:
             lambda: 'return id(setupComplete) == true;'
           then:
             #Flash thrice
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 0.15s
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 0.15s
-            - light.turn_on: led
+            - output.turn_on: state_led
             - delay: 0.15s
-            - light.turn_off: led
+            - output.turn_off: state_led
             - delay: 1s
       #Final state
       - if:
@@ -220,7 +220,7 @@ switch:
             - switch.is_on: relay
             - switch.is_off: disable_led
           then:
-            light.turn_on: led
+            output.turn_on: state_led
 
 sensor:
   # WiFi Signal Sensor
@@ -327,11 +327,6 @@ output:
     pin:
       number: GPIO13
       inverted: true
-
-light:
-  - platform: binary
-    output: state_led
-    id: led
 
 button:
   - platform: restart
