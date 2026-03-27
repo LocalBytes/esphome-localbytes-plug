@@ -15,7 +15,7 @@ esphome:
           value: "true"
 
 wifi:
-  power_save_mode: high
+  power_save_mode: LIGHT
 
 time:
   - platform: homeassistant
