@@ -17,6 +17,7 @@ substitutions:
   disable_button_default_state: "RESTORE_DEFAULT_OFF"
 
 esphome:
+  min_version: 2026.3.1
   name: "${name}"
   friendly_name: "${friendly_name}"
 
