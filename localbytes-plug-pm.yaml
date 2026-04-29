@@ -31,7 +31,7 @@ api:
         actual_value: float
       then:
         - lambda: |-
-            id(voltage_multiply) = actual_value / id(voltage).raw_state;
+            id(voltage_multiply) = actual_value / id(voltage).get_raw_state();
         - number.set:
             id: voltage_factor
             value: !lambda "return id(voltage_multiply);"
@@ -41,7 +41,7 @@ api:
         actual_value: float
       then:
         - lambda: |-
-            id(power_multiply) = actual_value / id(power).raw_state;
+            id(power_multiply) = actual_value / id(power).get_raw_state();
         - number.set:
             id: power_factor
             value: !lambda "return id(power_multiply);"
@@ -51,7 +51,7 @@ api:
         actual_value: float
       then:
         - lambda: |-
-            id(current_multiply) = actual_value / id(current).raw_state;
+            id(current_multiply) = actual_value / id(current).get_raw_state();
         - number.set:
             id: current_factor
             value: !lambda "return id(current_multiply);"
