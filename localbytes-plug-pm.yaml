@@ -25,8 +25,8 @@ time:
     timezone: Europe/London
 
 api:
-  services:
-    - service: calibrate_voltage
+  actions:
+    - action: calibrate_voltage
       variables:
         actual_value: float
       then:
@@ -36,7 +36,7 @@ api:
             id: voltage_factor
             value: !lambda "return id(voltage_multiply);"
 
-    - service: calibrate_power
+    - action: calibrate_power
       variables:
         actual_value: float
       then:
@@ -46,7 +46,7 @@ api:
             id: power_factor
             value: !lambda "return id(power_multiply);"
 
-    - service: calibrate_current
+    - action: calibrate_current
       variables:
         actual_value: float
       then:
