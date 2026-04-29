@@ -5,7 +5,6 @@ esphome:
   on_boot:
     priority: 300
     then:
-      #Signal to the template switches that their initial values have been loaded
       - lambda: |
           if (id(voltage_multiply) <= 0) id(voltage_multiply) = 0.3;
           if (id(power_multiply) <= 0) id(power_multiply) = 0.133;
@@ -19,7 +18,7 @@ wifi:
 
 network:
   enable_ipv6: true
-  
+
 time:
   - platform: homeassistant
     timezone: Europe/London
@@ -77,8 +76,7 @@ globals:
     restore_value: no
     initial_value: "false"
 
-binary_sensor:
-  # Push Button (Toggles Relay When Pressed)
+binary_sensor: # Push Button (Toggles Relay When Pressed)
   - platform: gpio
     pin:
       number: GPIO3
@@ -107,8 +105,7 @@ binary_sensor:
   - platform: status
     name: "Server Status"
 
-switch:
-  # Relay (As Switch)
+switch: # Relay (As Switch)
   - platform: gpio
     name: ""
     icon: "mdi:${main_icon}"
@@ -134,8 +131,7 @@ switch:
       - if:
           condition:
             lambda: 'return id(setupComplete) == true;'
-          then:
-            #Flash twice
+          then: #Flash twice
             - output.turn_off: state_led
             - delay: 0.15s
             - output.turn_on: state_led
@@ -150,8 +146,7 @@ switch:
       - if:
           condition:
             lambda: 'return id(setupComplete) == true;'
-          then:
-            #Flash twice
+          then: #Flash twice
             - output.turn_on: state_led
             - delay: 0.15s
             - output.turn_off: state_led
@@ -177,8 +172,7 @@ switch:
       - if:
           condition:
             lambda: 'return id(setupComplete) == true;'
-          then:
-            #Flash thrice
+          then: #Flash thrice
             - output.turn_off: state_led
             - delay: 0.15s
             - output.turn_on: state_led
@@ -203,8 +197,7 @@ switch:
       - if:
           condition:
             lambda: 'return id(setupComplete) == true;'
-          then:
-            #Flash thrice
+          then: #Flash thrice
             - output.turn_on: state_led
             - delay: 0.15s
             - output.turn_off: state_led
@@ -225,8 +218,7 @@ switch:
           then:
             output.turn_on: state_led
 
-sensor:
-  # WiFi Signal Sensor
+sensor: # WiFi Signal Sensor
   - platform: wifi_signal
     name: "WiFi Status"
     update_interval: 60s
@@ -271,8 +263,7 @@ sensor:
     device_class: energy
     power_id: power
     restore: false
-    filters:
-      # Multiplication factor from W to kW is 0.001
+    filters: # Multiplication factor from W to kW is 0.001
       - multiply: 0.001
     unit_of_measurement: kWh
 
